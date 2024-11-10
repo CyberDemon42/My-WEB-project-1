@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display JSON</title>
+</head>
+<body>
+    <h1>User Data</h1>
+    <pre id="json-display"></pre>
+
+    <div class="image-gallery" id="imagegallery111"></div>
+
+    <script>
+        // Получаем JSON из localStorage и парсим его
+        const userData = JSON.parse(localStorage.getItem('user'));
+        const games = userData.games;
+        
+        const imageContainer = document.getElementById('imagegallery111');
+
+        // Проверяем, существует ли JSON-объект
+        if (userData) {
+            // Преобразуем JSON обратно в строку с форматированием
+            document.getElementById('json-display').textContent = JSON.stringify(userData, null, 2);
+        } else {
+            document.getElementById('json-display').textContent = "No user data found in localStorage.";
+        }
+
+        games.forEach(game => {
+        const imgElement = document.createElement('img');
+        gamecard = JSON.parse(localStorage.getItem(game));
+        imgElement.src = gamecard.pathToPicture;
+        imageContainer.appendChild(imgElement);
+        });
+    </script>
+</body>
+</html>
